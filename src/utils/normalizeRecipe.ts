@@ -1,0 +1,26 @@
+import {AnalyzedInstruction, ExtendedIngredient, ResponseRecipe} from "../config/apiTypesResponseRecipe";
+
+// export type RecipeInfo = {
+//     image: string,
+//     preparation: number,
+//     cooking: number,
+//     ratings:number,
+//     servings: number,
+//     summary: string,
+//     ingredients: ExtendedIngredient[],
+//     analyzedInstructions: AnalyzedInstruction
+// }
+
+
+export const normalizeRecipe = (data:ResponseRecipe): { summary: string; image: string; servings: number; ratings: number; analyzedInstructions: AnalyzedInstruction[]; ingredients: ExtendedIngredient[]; cooking: number; preparation: number } => {
+            return {
+            image: data.image,
+            preparation: data.preparationMinutes,
+            cooking: data.cookingMinutes,
+            ratings: data.aggregateLikes,
+            servings: data.servings,
+            summary: data.summary,
+            ingredients: data.extendedIngredients,
+            analyzedInstructions: data.analyzedInstructions
+        }
+}

@@ -1,10 +1,11 @@
+import * as React from "react";
 import {Link, NavLink} from "react-router-dom";
 import Heart from "../Icons/Heart";
 import Logo from "../Icons/Logo";
 import User from "../Icons/User";
 import styles from './Header.module.scss'
 
-const Header = () => {
+const Header: React.FC = () => {
     return(
         <div className={`container ${styles.header_wrapper}`}>
             <div className={styles.header_menu}>
@@ -14,7 +15,7 @@ const Header = () => {
                 </Link>
                 <nav>
                     <NavLink to="." end>Recipes</NavLink>
-                    <NavLink to="recipe">Ingradients</NavLink>
+                    <NavLink to="recipe/782585">Ingradients</NavLink>
                     <NavLink to="1">Products</NavLink>
                     <NavLink to="2">Menu Items</NavLink>
                     <NavLink to="3">Meal Planning</NavLink>

@@ -1,6 +1,6 @@
 import React, {Ref} from 'react';
-import cn from "classnames";
-import styles from './Input.module.css'
+// import cn from "classnames";
+import styles from './Input.module.scss'
 
 export type InputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -14,10 +14,11 @@ export type InputProps = Omit<
   afterSlot?: React.ReactNode;
 };
 
+
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ value, onChange, afterSlot, ...props }, ref: Ref<HTMLInputElement>) => {
     return (
-        <div className={cn(props.className, styles.inputWrapper)}>
+        <div className={styles.inputWrapper}>
           <input
               onChange={(e) => onChange(e.target.value)}
               {...props}

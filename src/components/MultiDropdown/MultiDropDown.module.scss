@@ -1,0 +1,19 @@
+.listWrapper{
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+    background: #fff;
+    text-decoration: none;
+    list-style: none;
+    max-width: 368px;
+    padding: 0;
+    margin-top: 8px;
+}
+.item{
+    padding: 14px 12px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+    color: var(--color-primary);
+}
+.listWrapper:first-child{
+    color: var(--color-accent);
+}
