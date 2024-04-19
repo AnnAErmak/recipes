@@ -1,8 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
+import cn from "classnames";
+import * as React from 'react';
 import ArrowDownIcon from "../Icons/ArrowDownIcon";
 import Input from "../Input";
-// import cn from "classnames";
+import Text from "../Text";
 import styles from './MultiDropDown.module.scss'
+
 export type Option = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
   key: string;
@@ -26,67 +28,106 @@ export type MultiDropdownProps = {
 };
 
 const MultiDropdown: React.FC<MultiDropdownProps> = ({
-                                                         options,
-                                                         value,
-                                                         onChange,
-                                                         getTitle,
-                                                         disabled,
-                                                     }) => {
-    const [showDropdown, setShowDropdown] = useState(false);
-    const [filterValue, setFilterValue] = useState('');
-    const dropdownRef = useRef<HTMLInputElement>(null);
-    const [isFilter, setIsFilter] = useState(false)
+    className,
+    options,
+    value,
+    onChange,
+    getTitle,
+    disabled,
+}) => {
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
+    const ref = React.useRef<HTMLInputElement>(null);
+    const [filter, setFilter] = React.useState('');
+    const [isOpened, setIsOpened] = React.useState(false);
 
-    const handleOutsideClick = (e: MouseEvent) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-            setShowDropdown(false);
+    const open =() => {
+        setIsOpened(true)
+    }
+    React.useEffect(() => {
+        const handlerClick = (e: MouseEvent) => {
+            if(!wrapperRef.current?.contains(e.target as HTMLElement)){
+                setIsOpened(false)
+            }
         }
-    };
+        window.addEventListener('click', handlerClick)
 
-    useEffect(() => {
-        document.addEventListener('mousedown', handleOutsideClick);
         return () => {
-            document.removeEventListener('mousedown', handleOutsideClick);
-        };
-    }, []);
+            window.removeEventListener('click', handlerClick)
+        }
+    }, [])
 
-    const filteredOptions = options.filter((option) =>
-        option.value.toLowerCase().includes(filterValue.trim().toLowerCase())
+    React.useEffect(()=>{
+        if (isOpened){
+            setFilter('')
+        }
+    }, [isOpened])
+
+    const title = React.useMemo(() => getTitle(value), [getTitle, value]);
+
+    const isEmpty = value.length === 0;
+
+    const filteredOptions = React.useMemo(() => {
+        const str = filter.toLocaleLowerCase();
+        return options.filter(
+            (o) => o.value.toLocaleLowerCase().indexOf(str) === 0
+        );
+    }, [filter, options]);
+
+    const selectedKeySet = React.useMemo<Set<Option['key']>>(
+        () => new Set(value.map(({key}) => key)),
+        [value]
     );
-
-    const handleOptionClick = (selectedOption: Option) => {
-        const keysArray = value.map(item => item.key);
-        const sov = keysArray.includes(selectedOption.key)
-            const newValue = sov
-            ? value.filter((option) => option.key !== selectedOption.key)
-            : [...value, selectedOption];
-                onChange(newValue);
-                setIsFilter(false)
-
-    };
+    const onSelect = React.useCallback(
+        (option: Option) => {
+            if (disabled){
+                return;
+            }
+            if(selectedKeySet.has(option.key)){
+                onChange([...value].filter(({key}) => key !== option.key))
+            }else{
+                onChange([...value, option])
+            }
+            ref.current?.focus();
+        },
+        [disabled, onChange, value, selectedKeySet]
+    );
+    const opened = isOpened && !disabled;
 
     return (
-        <div  ref={dropdownRef}>
-            <Input
-                type="text"
-                placeholder={getTitle(value)}
-                value={isFilter ? filterValue : value.length ? getTitle(value) : ''}
-                onChange={(e) => {
-                    setIsFilter(true)
-                    setFilterValue(e)
-                }}
-                onClick={() => setShowDropdown(true)}
-                disabled={disabled}
-                afterSlot={<ArrowDownIcon color="secondary" />}
-            />
-            {showDropdown && !disabled && (
-                <ul className={styles.listWrapper}>
+        <div className={cn(
+            className ? className: '',
+            styles.multi_dropdown
+            )}
+             ref={wrapperRef}
+        >
+         <Input
+         // className = {styles.multi_dropdown_filed}
+         onClick={open}
+         disabled={disabled}
+         plaseholder={title}
+         value={opened ? filter : isEmpty ? "" : title}
+         onChange={setFilter}
+         afterSlot={<ArrowDownIcon color="secondary"/>}
+         ref={ref}
+         />
+            {opened && (
+                <div className={styles.multi_dropdown_options}>
                     {filteredOptions.map((option) => (
-                        <li className={styles.item} key={option.key} onClick={() => handleOptionClick(option)}>
-                            {option.value}
-                        </li>
+                        <button
+                        className={cn(
+                            styles.multi_dropdown_option,{
+                                [styles.multi_dropdown_option_selected]: selectedKeySet.has(option.key)
+                            }
+                        )}
+                        key={option.key}
+                        onClick={() => {
+                            onSelect(option)
+                        }}
+                        >
+                            <Text view={'p-16'}>{option.value}</Text>
+                        </button>
                     ))}
-                </ul>
+                </div>
             )}
         </div>
     );

@@ -1,49 +1,32 @@
 @import "../../styles/variables";
 
 .button{
-    padding: 17px 20px;
-    background: $button-primary-bg;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 100%;
-    color: $button-primary-text;
-    display: flex;
-    justify-content: center;
+    display: inline-flex;
     align-items: center;
-    height: 52px;
-}
-.button:hover{
-    background: $button-primary-bg-hover;
-}
+    min-height: 52px;
+    padding: $space-s $space-l;
+    border: none;
+    background: $button-primary-bg;
+    color: $button-primary-text;
+    cursor: pointer;
 
-.button:active{
-    background: $button-primary-bg-active;
-}
-.button.loading > svg{
-    fill: #fff;
-    margin-right: 8px;
-}
-.button.loading:hover{
-    background: var(--color-accent);
-}
-.button.loading{
-    /*background: #487773;*/
-    /*background: #d9d9d9;*/
-    background: $loader-bg;
-    pointer-events: none;
-}
-.button.loadingDisable{
-    background: $button-primary-bg-disabled;
-}
-.button.loadingDisable > svg{
-    fill: #fff;
-    margin-right: 8px;
-}
-.button.Disable {
-    background: $button-primary-bg-disabled;
-    pointer-events: none;
-}
-.button.Disable > svg{
-    fill: #fff;
-    margin-right: 8px;
+    &:hover{
+        background: $button-primary-bg-hover;
+    }
+    &:active{
+        background: $button-primary-bg-active;
+    }
+    &:disabled{
+        pointer-events: none;
+        cursor: default;
+    }
+
+    & .button_disabled{
+        background: $button-primary-bg-disabled;
+    }
+    & .button_loader {
+        flex-shrink: 0;
+        margin-right: 8px;
+        color: currentColor;
+    }
 }

@@ -1,59 +1,115 @@
 import cn from "classnames";
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
+import imgUrl from 'assets/cardInfo_bg.png'
 import Text from "components/Text";
 import ArrowDownIcon from "../../../components/Icons/ArrowDownIcon";
-import {getInfoRecipe} from "../../../utils/api";
-import {normalizeRecipe} from "../../../utils/normalizeRecipe";
-import {r} from './recipe'
+import Dishtrai from "../../../components/Icons/Dishtrai";
+import Ladle from "../../../components/Icons/Ladle";
+import {getEquipmentById, getInfoRecipe} from "../../../utils/api";
+import {normalizeRecipe, RecipeInfo} from "../../../utils/normalizeRecipe";
+import {rec} from'./recipe';
 import styles from './InfoRecipe.module.scss'
+
+
 const InfoRecipe = () => {
-    const [recipe, setRecipe] = useState({})
-        console.log(r.id)
-    const { id } = useParams()
+    const [recipe, setRecipe] = useState<RecipeInfo | null>(rec)
+    const [equipment, setEquipment] = useState([])
+
+    const {id} = useParams()
 
     useEffect(() => {
-            const fetchRecipeInfo = async (idRecipe) => {
-                const response = await getInfoRecipe(idRecipe)
-                const recipeInfo = normalizeRecipe(response)
-            }
+        const fetchRecipeInfo = async (idRecipe) => {
+            const response = await getInfoRecipe(idRecipe)
+            const equipment = await getEquipmentById(idRecipe)
+            const recipeInfo = normalizeRecipe(response)
 
-            // fetchRecipeInfo(id)
+            setEquipment(equipment)
+            setRecipe(recipeInfo)
+        }
+
+        fetchRecipeInfo(id)
     }, [])
-    return(
 
+    console.log(recipe)
+    if (!recipe) {
+        return <p>Нет данных о рецепте</p>
+    }
+    return (
         <main className={cn('container', styles.card_info_wrapper)}>
-            <img src={'src/assets/cardInfo_bg.png'} alt={'bg_cardInfo'}/>
+            <img src={imgUrl} alt={'bg_cardInfo'}/>
             <section className={styles.linkBack}>
-                <Link to="/">
-                    <ArrowDownIcon />
+                <Link to="/" className={styles.arrownLink}>
+                    <ArrowDownIcon color={'primary'}/>
                     <Text tag='h1'>Pancake Breakfast Casserole</Text>
                 </Link>
             </section>
             <section className={styles.shortInfo_wrapper}>
-                <div>
-                    <img src={''} alt={'pictureof a dish'}/>
+                <div className={styles.img}>
+                    <img className={styles.img_recipe} src={recipe.image} alt={'pictureof a dish'}/>
                 </div>
                 <div className={styles.cooking_time_info}>
-                    тайменги
+                    <div>
+                        <p>Preparation</p>
+                        <p>{recipe.preparation} minutes</p>
+                    </div>
+                    <div>
+                        <p>Cooking</p>
+                        <p>{recipe.cooking} minutes</p>
+                    </div>
+                    <div>
+                        <p>Total</p>
+                        <p>{560} minutes</p>
+                    </div>
+                    <div>
+                        <p>Ratings</p>
+                        <p>{recipe.ratings} likes</p>
+                    </div>
+                    <div>
+                        <p>Servings</p>
+                        <p>{recipe.servings} servings</p>
+                    </div>
                 </div>
             </section>
             <section className={styles.short_recipe}>
-                <Text>
-                    Pancake Breakfast Casserole takes around 9 hours and 20 minutes from beginning to end. One portion of this dish contains approximately 13g  of protein, 19g of fat, and a total of 499 calories. For $2.33 per serving, this recipe covers 19% of your daily requirements of vitamins and minerals. This recipe serves 8. It works well as a main course. 3369 people were glad they tried this recipe. It is brought to you by Foodnetwork. It is a good option if you're following a lacto ovo vegetarian diet. If you have sugar, baking soda, eggs, and a few other ingredients on hand, you can make it. It is perfect for Christmas. Taking all factors into account, this recipe earns a spoonacular score of 65%, which is pretty good. Similar recipes are Pancake Breakfast Casserole, Pancake Breakfast Casserole, and Pancake Breakfast Casserole.
-                </Text>
+                <div dangerouslySetInnerHTML={{__html: recipe.summary}}>
+                </div>
             </section>
-            <section>
+            <section className={styles.composition_wrapper}>
                 <div className={styles.ingredients}>
-                    ингридиенты
+                    <Text className={styles.title}>Ingredients</Text>
+                    <div className={styles.ingredients_list}>
+                        {recipe.ingredients.map(item => (
+                            <div key={item.id} className={styles.ingredient}>
+                                <div className={styles.svg_wrapper}><Dishtrai/></div>
+                                <Text>{item.original}</Text>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className={styles.equipment}>
-                    Экипировка
+                    <Text className={styles.title}>Equipment</Text>
+                    <div className={styles.ingredients_list}>
+                        {equipment.map(item => (
+                            <div key={item.name} className={styles.ingredient}>
+                                <div className={styles.svg_wrapper}><Ladle/></div>
+                                <Text>{item.name}</Text>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
             <section>
-                <Text>Directions</Text>
-                Steps
+                <Text className={styles.title}>Directions</Text>
+                <div className={styles.steps_wrapper}>
+                    {!recipe.analyzedInstructions[0].steps && <></>}
+                    {recipe.analyzedInstructions[0].steps.map(item => (
+                        <div key={item.number}>
+                            <Text className={styles.sub_title}>{`Step ${item.number}`}</Text>
+                            <Text>{item.step}</Text>
+                        </div>
+                    ))}
+                </div>
             </section>
         </main>
     )

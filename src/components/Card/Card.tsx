@@ -1,8 +1,6 @@
 import cn from "classnames";
 import * as React from 'react';
-import Text from "../Text";
 import styles from './Card.module.scss'
-// import cn from "classnames";
 
 export type CardProps = {
     /** Дополнительный classname */
@@ -35,16 +33,21 @@ const Card: React.FC<CardProps> = ({
                                    }) => {
 
     return (
-        <div className={cn(styles.cardWrapper, className)} onClick={onClick}>
+        <div className={cn(
+            styles.cardWrapper,
+            className ? className : ''
+        )}
+             onClick={onClick}
+        >
             <div className={styles.imgWrapper}>
-                <img src={image} alt={'картинка'}/>
+                <img className={styles.img} src={image} alt={'картинка'}/>
             </div>
             <div className={styles.contentWrapper}>
-                {captionSlot && <p className={styles.textContent}>{captionSlot}</p>}
-                <Text className={styles.title}>{title}</Text>
+                {captionSlot}
+                {title}
                 {subtitle}
                 <div className={styles.actionsWrapper}>
-                    <div className={styles.contentSlot}>{contentSlot}</div>
+                    <div>{contentSlot}</div>
                     {actionSlot}
                 </div>
             </div>

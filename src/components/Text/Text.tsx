@@ -20,6 +20,7 @@ export type TextProps = {
 };
 
 const Text: React.FC<TextProps> = ({
+
     className,
     tag: Tag= 'p',
     weight = 'normal',
@@ -30,7 +31,14 @@ const Text: React.FC<TextProps> = ({
    }) => {
     return(
     <Tag
-        className={cn(styles.lainCount, className)}
+        className={cn(
+            styles.text,
+            styles[`text_view_${view}`],
+            styles[`text_weight_${weight}`],
+            styles[`text_color_${color}`],
+            !!maxLines && styles.text_clamp,
+            className ? className: ''
+        )}
     style={{'--lines-count': maxLines} as React.CSSProperties}
     >
         {children}

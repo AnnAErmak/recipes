@@ -1,0 +1,17 @@
+@import "src/styles/variables";
+
+.icon{
+  display: inline-block;
+  flex-shrink: 0;
+  color: currentColor;
+
+  &.icon_color_primary{
+    color: $button-primary-bg;
+  }
+  &.icon_color_secondary{
+    color: $text-secondary;
+  }
+  &.icon_color_accent{
+    color: $icon-black;
+  }
+}

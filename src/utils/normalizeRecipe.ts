@@ -10,9 +10,17 @@ import {AnalyzedInstruction, ExtendedIngredient, ResponseRecipe} from "../config
 //     ingredients: ExtendedIngredient[],
 //     analyzedInstructions: AnalyzedInstruction
 // }
+export interface RecipeInfo{
+    summary: string;
+    image: string;
+    servings: number;
+    ratings: number;
+    analyzedInstructions: AnalyzedInstruction[];
+    ingredients: ExtendedIngredient[];
+    cooking: number;
+    preparation: number }
 
-
-export const normalizeRecipe = (data:ResponseRecipe): { summary: string; image: string; servings: number; ratings: number; analyzedInstructions: AnalyzedInstruction[]; ingredients: ExtendedIngredient[]; cooking: number; preparation: number } => {
+export const normalizeRecipe = (data:ResponseRecipe): RecipeInfo => {
             return {
             image: data.image,
             preparation: data.preparationMinutes,
