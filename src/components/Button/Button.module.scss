@@ -1,0 +1,32 @@
+@import "../../styles/variables";
+
+.button{
+    display: inline-flex;
+    align-items: center;
+    min-height: 52px;
+    padding: $space-s $space-l;
+    border: none;
+    background: $button-primary-bg;
+    color: $button-primary-text;
+    cursor: pointer;
+
+    &:hover{
+        background: $button-primary-bg-hover;
+    }
+    &:active{
+        background: $button-primary-bg-active;
+    }
+    &:disabled{
+        pointer-events: none;
+        cursor: default;
+    }
+
+    & .button_disabled{
+        background: $button-primary-bg-disabled;
+    }
+    & .button_loader {
+        flex-shrink: 0;
+        margin-right: 8px;
+        color: currentColor;
+    }
+}
