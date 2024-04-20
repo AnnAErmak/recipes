@@ -35,8 +35,8 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     getTitle,
     disabled,
 }) => {
-    const wrapperRef = React.useRef<HTMLDivElement>(null);
-    const ref = React.useRef<HTMLInputElement>(null);
+    const wrapperRef = React.useRef<HTMLDivElement | null>(null);
+    const ref = React.useRef<HTMLInputElement | null>(null);
     const [filter, setFilter] = React.useState('');
     const [isOpened, setIsOpened] = React.useState(false);
 

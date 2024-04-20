@@ -1,15 +1,5 @@
 import {AnalyzedInstruction, ExtendedIngredient, ResponseRecipe} from "../config/apiTypesResponseRecipe";
 
-// export type RecipeInfo = {
-//     image: string,
-//     preparation: number,
-//     cooking: number,
-//     ratings:number,
-//     servings: number,
-//     summary: string,
-//     ingredients: ExtendedIngredient[],
-//     analyzedInstructions: AnalyzedInstruction
-// }
 export interface RecipeInfo{
     summary: string;
     image: string;

@@ -1,5 +1,5 @@
 import cn from "classnames";
-import {useEffect, useState} from "react";
+import * as React from "react";
 import {Link, useParams} from "react-router-dom";
 import imgUrl from 'assets/cardInfo_bg.png'
 import Text from "components/Text";
@@ -8,17 +8,16 @@ import Dishtrai from "../../../components/Icons/Dishtrai";
 import Ladle from "../../../components/Icons/Ladle";
 import {getEquipmentById, getInfoRecipe} from "../../../utils/api";
 import {normalizeRecipe, RecipeInfo} from "../../../utils/normalizeRecipe";
-import {rec} from'./recipe';
 import styles from './InfoRecipe.module.scss'
 
 
 const InfoRecipe = () => {
-    const [recipe, setRecipe] = useState<RecipeInfo | null>(rec)
-    const [equipment, setEquipment] = useState([])
+    const [recipe, setRecipe] = React.useState<RecipeInfo | null>(null)
+    const [equipment, setEquipment] = React.useState([])
 
     const {id} = useParams()
 
-    useEffect(() => {
+    React.useEffect(() => {
         const fetchRecipeInfo = async (idRecipe) => {
             const response = await getInfoRecipe(idRecipe)
             const equipment = await getEquipmentById(idRecipe)
@@ -31,7 +30,6 @@ const InfoRecipe = () => {
         fetchRecipeInfo(id)
     }, [])
 
-    console.log(recipe)
     if (!recipe) {
         return <p>Нет данных о рецепте</p>
     }
@@ -77,22 +75,22 @@ const InfoRecipe = () => {
             </section>
             <section className={styles.composition_wrapper}>
                 <div className={styles.ingredients}>
-                    <Text className={styles.title}>Ingredients</Text>
+                    <Text view={'p-20'} weight={'bold'} className={styles.title}>Ingredients</Text>
                     <div className={styles.ingredients_list}>
-                        {recipe.ingredients.map(item => (
-                            <div key={item.id} className={styles.ingredient}>
+                        {recipe.ingredients.map((item, index) => (
+                            <div key={item.id + index} className={styles.ingredient}>
                                 <div className={styles.svg_wrapper}><Dishtrai/></div>
-                                <Text>{item.original}</Text>
+                                <Text view={'p-16'}>{item.original}</Text>
                             </div>
                         ))}
                     </div>
                 </div>
                 <div className={styles.equipment}>
-                    <Text className={styles.title}>Equipment</Text>
+                    <Text view={'p-20'} weight={'bold'} className={styles.title}>Equipment</Text>
                     <div className={styles.ingredients_list}>
                         {equipment.map(item => (
                             <div key={item.name} className={styles.ingredient}>
-                                <div className={styles.svg_wrapper}><Ladle/></div>
+                                <Ladle/>
                                 <Text>{item.name}</Text>
                             </div>
                         ))}
@@ -100,13 +98,13 @@ const InfoRecipe = () => {
                 </div>
             </section>
             <section>
-                <Text className={styles.title}>Directions</Text>
+                <Text view={'p-20'} weight={'bold'} className={styles.title}>Directions</Text>
                 <div className={styles.steps_wrapper}>
                     {!recipe.analyzedInstructions[0].steps && <></>}
                     {recipe.analyzedInstructions[0].steps.map(item => (
                         <div key={item.number}>
-                            <Text className={styles.sub_title}>{`Step ${item.number}`}</Text>
-                            <Text>{item.step}</Text>
+                            <Text view={'p-16'} weight={'bold'}>{`Step ${item.number}`}</Text>
+                            <Text view={'p-14'}>{item.step}</Text>
                         </div>
                     ))}
                 </div>

@@ -1,5 +1,4 @@
-import {defaults} from "axios";
-import {useState} from "react";
+import * as React from "react";
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import {PaginationContext} from "../utils/PaginationContext";
 import InfoRecipe from "./pages/InfoRecipe/InfoRecipe";
@@ -9,7 +8,7 @@ import Recipes from "./pages/Recipes";
 const Provider = PaginationContext.Provider
 
 const App = () => {
-    const [activePage, setActivePage] = useState(1)
+    const [activePage, setActivePage] = React.useState(1)
     return (
         <BrowserRouter>
             <Routes>

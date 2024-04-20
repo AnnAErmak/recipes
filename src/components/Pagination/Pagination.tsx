@@ -4,7 +4,7 @@ import Button from "../Button";
 import ArrowDownIcon from "../Icons/ArrowDownIcon";
 import styles from './Pagination.module.scss'
 
-type Pagination = {
+type PaginationProps = {
     count: number,
     limit: number,
     page: number,
@@ -12,14 +12,14 @@ type Pagination = {
     onChangePage: (number:number)=>void;
 }
 
-const Pagination: React.FC<Pagination> = ({
+const Pagination: React.FC<PaginationProps> = ({
     count,
     limit,
     page,
     indent,
     onChangePage
 }) => {
-    const handleronChangePage =(page) => {
+    const handlerOnChangePage =(page) => {
         if(page > 0 && page < length){
             onChangePage(page)
         }
@@ -41,27 +41,35 @@ const Pagination: React.FC<Pagination> = ({
     if (right < length - 1) items.push(null);
     if (right < length) items.push(length);
     return (
+        <div className={styles.pagination_wrapper}>
+            <Button
+                className={cn(
+                    styles.arrow_left,
+                    styles.button_pagination,
+                    {[styles.arrowActive]: page > 1}
+                )}
+                onClick={() =>handlerOnChangePage(page -1)}
+            >
+                <ArrowDownIcon/>
+            </Button>
         <ul className={styles.list}>
-            <li>
-                <Button
-                    className={cn(styles.arrow, {[styles.arrowActive]: page > 1})}
-                    onClick={() =>handleronChangePage(page -1)}>
-                        <ArrowDownIcon />
-                </Button>
-            </li>
             {items.map((number, index) => (
                 <li className={`${styles.item} ${number === page && styles.active}`} key={index} onClick={() => onChangePage(number)}>
                     {number || '...'}
                 </li>
             ))}
-            <li>
-                <Button
-                    className={cn(styles.arrow, {[styles.arrowActive]: page < length})}
-                    onClick={() =>handleronChangePage(page + 1)}>
-                    <ArrowDownIcon />
-                </Button>
-            </li>
         </ul>
+        <Button
+            className={cn(
+                styles.arrow_right,
+                styles.button_pagination,
+                {[styles.arrowActive]: page < length}
+            )}
+            onClick={() =>handlerOnChangePage(page + 1)}
+        >
+            <ArrowDownIcon/>
+        </Button>
+    </div>
     );
 }
 

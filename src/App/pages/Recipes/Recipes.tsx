@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import * as React from "react";
 import {Link} from "react-router-dom";
 import Button from "components/Button";
 import Card from "components/Card";
@@ -9,25 +9,22 @@ import Pagination from "components/Pagination";
 import Text from "components/Text";
 import {PAGINATION_LIMIT, INDENT} from "config/paginations";
 import {getRecipes} from "utils/api";
-
 import {normalizeRecipes} from "utils/normalizeRecipes";
 import Watch from "../../../components/Icons/Watch";
 import {PaginationContext} from "../../../utils/PaginationContext";
-import {re} from '../InfoRecipe/recipe'
 import styles from './Recipes.module.scss'
 
 const Recipes = () => {
-    const [recipes, setRecipes] = useState(re);
-    const [countRecipes, setcountRecipes] = useState(0)
-    // const [activePage, setActivePage] = useState(1)
+    const [recipes, setRecipes] = React.useState([]);
+    const [countRecipes, setcountRecipes] = React.useState(0)
 
-    const {activePage, setActivePage} = useContext(PaginationContext)
+    const {activePage, setActivePage} = React.useContext(PaginationContext)
 
     const handlerPagination = (page) => {
         setActivePage(page)
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
 
         const fetchLimitRecipes = async () => {
             const response = await getRecipes({
@@ -40,12 +37,9 @@ const Recipes = () => {
             setRecipes([...recipes.recipe])
             setcountRecipes(recipes.totalResults)
         }
-
-
-        // fetchLimitRecipes()
-
+        fetchLimitRecipes()
     }, [activePage])
-// console.log(recipes)
+
     return (
 
             <main>

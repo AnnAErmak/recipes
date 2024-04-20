@@ -18,7 +18,7 @@ const Header: React.FC = () => {
                     </Link>
                     <nav>
                         <NavLink to="." end>Recipes</NavLink>
-                        <NavLink to="recipe/782585">Ingradients</NavLink>
+                        <NavLink to="0">Ingredients</NavLink>
                         <NavLink to="1">Products</NavLink>
                         <NavLink to="2">Menu Items</NavLink>
                         <NavLink to="3">Meal Planning</NavLink>

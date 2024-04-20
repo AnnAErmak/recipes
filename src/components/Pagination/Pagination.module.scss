@@ -1,50 +1,64 @@
 @import 'src/styles/variables';
-.list{
+.pagination_wrapper{
   display: flex;
-  list-style: none;
-  gap: 5px;
   justify-content: center;
-
-  .item{
-    text-align: center;
-    width: 52px;
-    height: 52px;
-    background: transparent;
-    color: $color-text-primary;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 122%;
+  .list{
     display: flex;
-    align-items: center;
+    list-style: none;
+    gap: 5px;
     justify-content: center;
-    cursor: pointer;
-    transition: background-color ease-in-out 0.5ms;
-  }
-  .item:hover{
-    background-color: $button-primary-bg-hover;
-  }
-  .item.active{
-    background-color: $loader-bg;
-  }
+    padding: 0;
+    margin: 0;
 
-  .arrow{
-    cursor: none;
-    pointer-events: none;
-    background: transparent;
-    svg{
-      transform: rotate(90deg);
-      stroke: #3b3b3b;
+    .item{
+      text-align: center;
+      width: 52px;
+      height: 52px;
+      background: transparent;
+      color: $color-text-primary;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 122%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+
+      &:hover{
+        background-color: $button-primary-bg-hover;
+      }
+      &.active{
+        background-color: $loader-bg;
+        color: $button-primary-text;
+      }
+
     }
   }
-  .arrowActive {
-    cursor: pointer;
-    pointer-events: all;
 
-    svg {
-      stroke: black;
+  .button_pagination{
+    background: transparent;
+    pointer-events: none;
+    color: $text-secondary;
+
+    &.arrow_left{
+      transform: rotate(90deg);
+    }
+
+    &.arrow_right{
       transform: rotate(-90deg);
     }
-  }
+    &.arrowActive{
+      color: $color-text-primary;
+      pointer-events: auto;
+    }
 
+  }
 }
+
+
+
+
+
+
 

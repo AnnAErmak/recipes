@@ -29,6 +29,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <label className={cn(
 
             styles.input,
+            {
+               [styles.input_disabled]: disabled
+            }
             // disabled ? styles.input_disabled: ''
         )}>
           <input

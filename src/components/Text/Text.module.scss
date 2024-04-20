@@ -3,34 +3,28 @@
 .text {
 
   &.text_view_title {
-    // Стили для view 'title'
     font-size: 44px;
     font-weight: 700;
   }
 
   &.text_view_button {
-    // Стили для view 'button'
     font-size: 18px;
     font-weight: 400;
   }
 
   &.text_view_p-20 {
-    // Стили для view 'p-20'
     font-size: 20px;
   }
 
   &.text_view_p-18 {
-    // Стили для view 'p-18'
     font-size: 18px;
   }
 
   &.text_view_p-16 {
-    // Стили для view 'p-16'
     font-size: 16px;
   }
 
   &.text_view_p-14 {
-    // Стили для view 'p-14'
     font-size: 14px;
   }
 
@@ -63,7 +57,6 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-line-clamp: var(--lines-count, 2); // Значение из пропсов
-    //max-height: calc(1em * var(--lines-count, 2));
+    -webkit-line-clamp: var(--lines-count, 2);
   }
 }

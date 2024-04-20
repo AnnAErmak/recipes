@@ -19,7 +19,7 @@ const Icon:React.FC<IconProps> = ({
             className={cn(
                 className ? className: '',
                 styles.icon,
-                styles[`icon_color_${color}`]
+                styles[`icon_color_${color}`],
             )}
             xmlns="http://www.w3.org/2000/svg"
             width={width}

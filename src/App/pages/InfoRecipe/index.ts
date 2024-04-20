@@ -1,1 +1,1 @@
-export {defailt} from './InfoRecipe'
+export {default} from './InfoRecipe'
