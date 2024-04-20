@@ -7,7 +7,7 @@ import Recipes from "./pages/Recipes";
 
 const Provider = PaginationContext.Provider
 
-const App = () => {
+const App: React.FC = () => {
     const [activePage, setActivePage] = React.useState(1)
     return (
         <BrowserRouter>

@@ -11,7 +11,7 @@ import {normalizeRecipe, RecipeInfo} from "../../../utils/normalizeRecipe";
 import styles from './InfoRecipe.module.scss'
 
 
-const InfoRecipe = () => {
+const InfoRecipe: React.FC = () => {
     const [recipe, setRecipe] = React.useState<RecipeInfo | null>(null)
     const [equipment, setEquipment] = React.useState([])
 

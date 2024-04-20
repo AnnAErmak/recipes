@@ -14,7 +14,7 @@ import Watch from "../../../components/Icons/Watch";
 import {PaginationContext} from "../../../utils/PaginationContext";
 import styles from './Recipes.module.scss'
 
-const Recipes = () => {
+const Recipes: React.FC = () => {
     const [recipes, setRecipes] = React.useState([]);
     const [countRecipes, setcountRecipes] = React.useState(0)
 
