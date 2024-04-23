@@ -1,7 +1,8 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom/client'
-import App from './App'
-import './styles/index.scss';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
+import App from './App';
+import 'styles/index.scss';
+import 'config/configureMobX';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

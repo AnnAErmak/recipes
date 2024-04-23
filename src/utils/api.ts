@@ -1,7 +1,7 @@
 import axios, {AxiosRequestConfig} from "axios";
-import {ResponseRecipes} from "/config/apiTypesResponseRecipes";
-import {API_KEY, BASE_HEADER, BASE_URL} from "../config/api";
-import {ResponseRecipe} from "../config/apiTypesResponseRecipe";
+import {API_KEY, BASE_HEADER, BASE_URL} from "config/api";
+import {ResponseRecipe} from "config/apiTypesResponseRecipe";
+import {ResponseRecipes} from "config/apiTypesResponseRecipes";
 
 axios.defaults.baseURL = BASE_URL
 axios.defaults.headers.get = BASE_HEADER
