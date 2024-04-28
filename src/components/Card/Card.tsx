@@ -33,12 +33,7 @@ const Card: React.FC<CardProps> = ({
                                    }) => {
 
     return (
-        <div className={cn(
-            styles.cardWrapper,
-            className ? className : ''
-        )}
-             onClick={onClick}
-        >
+        <div className={cn(styles.cardWrapper, className)} onClick={onClick}>
             <div className={styles.imgWrapper}>
                 <img className={styles.img} src={image} alt={'картинка'}/>
             </div>

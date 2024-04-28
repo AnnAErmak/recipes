@@ -1,5 +1,4 @@
 import cn from "classnames";
-import {observer} from "mobx-react-lite";
 import * as React from 'react';
 import ArrowDownIcon from "../Icons/ArrowDownIcon";
 import Input from "../Input";

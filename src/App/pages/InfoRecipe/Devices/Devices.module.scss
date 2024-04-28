@@ -1,0 +1,21 @@
+.devices{
+  padding-left: 53px;
+
+  .title{
+    margin-bottom: 24px;
+  }
+  .list{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 29px;
+    row-gap: 8px;
+    max-height: 630px;
+    padding-right: 10px;
+  }
+  .device{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 16px;
+  }
+}

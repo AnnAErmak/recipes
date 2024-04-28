@@ -19,6 +19,7 @@ const Pagination: React.FC<PaginationProps> = ({
     indent,
     onChangePage
 }) => {
+
     const handlerOnChangePage =(page) => {
         if(page > 0 && page < length){
             onChangePage(page)

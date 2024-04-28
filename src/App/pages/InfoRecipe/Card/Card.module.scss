@@ -1,0 +1,33 @@
+.card{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  gap: 166px;
+  margin-bottom: 49px;
+
+  &__img{
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & img{
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__cookingInfo{
+
+    .list{
+      padding: 76px 35px 76px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 100px;
+
+      li{
+        p{
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+}

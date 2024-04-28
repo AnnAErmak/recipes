@@ -1,20 +1,20 @@
 import * as React from "react";
 import {Link, NavLink} from "react-router-dom";
-import Heart from "../Icons/Heart";
-import Logo from "../Icons/Logo";
-import User from "../Icons/User";
+import Container from "components/Container";
+import Heart from "components/Icons/Heart";
+import Logo from "components/Icons/Logo";
+import User from "components/Icons/User";
+import Text from "components/Text";
 import styles from './Header.module.scss'
 
 const Header: React.FC = () => {
     return (
-        <header>
-
-
-            <div className={`container ${styles.header_wrapper}`}>
-                <div className={styles.header_menu}>
+        <header className={styles.header}>
+            <Container className={styles.wrapper}>
+                <div className={styles.menu}>
                     <Link to='/' className={styles.logo}>
                         <Logo/>
-                        <p>Food Client</p>
+                        <Text view={'p-20'} weight ="bold">Food Client</Text>
                     </Link>
                     <nav>
                         <NavLink to="." end>Recipes</NavLink>
@@ -28,7 +28,7 @@ const Header: React.FC = () => {
                     <User/>
                     <Heart/>
                 </div>
-            </div>
+            </Container>
         </header>
     )
 }

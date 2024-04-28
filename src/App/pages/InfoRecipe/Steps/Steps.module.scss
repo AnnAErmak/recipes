@@ -1,0 +1,16 @@
+.title{
+  margin-bottom: 24px;
+}
+.steps{
+  width: 740px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 60px;
+
+  & div {
+    p:first-child {
+      margin-bottom: 8px;
+    }
+  }
+}

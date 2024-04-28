@@ -51,3 +51,7 @@ export const getEquipmentById = async (id: number) => {
         console.error(err.message)
     }
 }
+
+
+
+

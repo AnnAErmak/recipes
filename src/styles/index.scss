@@ -38,10 +38,11 @@ body{
 #root{
   background: rgba(255, 192, 118, 0.23);
 }
-
-.container{
-  max-width: 1240px;
-  margin: 0 auto;
+ul{
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  list-style: none;
 }
 .active{
   color: #b5460f;

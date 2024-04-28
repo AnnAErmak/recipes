@@ -1,25 +1,28 @@
-import {action, computed, makeObservable, observable} from "mobx";
+import {action, computed, IReactionDisposer, makeObservable, observable, reaction} from "mobx";
 import {Option} from "components/MultiDropdown";
 import {ILocalStore} from "utils/useLocalStore";
+import rootStore from "../RootStore";
 
-type PrivateFields = '_search' | '_filterCategory' | '_activePage' ;
+type PrivateFields = '_search' | '_filterCategory' | '_activePage' | "_title" ;
 
 export default class FilterStore implements ILocalStore{
 
     private _search: string = "";
     private _filterCategory: Option[] = [];
-    // private _titleCategory: string = "";
     private _activePage: number = 1;
+    private _title: string = ''
 
     constructor() {
         makeObservable<FilterStore, PrivateFields>(this, {
             _search: observable,
             _filterCategory: observable.ref,
             _activePage: observable,
+            _title: observable,
 
             search: computed,
             filterCategory: computed,
             activePage: computed,
+            title: computed,
 
             setSearch: action,
             setFilterCategory: action,
@@ -34,12 +37,12 @@ export default class FilterStore implements ILocalStore{
     get filterCategory(): Option[]{
         return this._filterCategory
     }
-    // get titleCategory(): string{
-    //     return this._titleCategory
-    // }
 
     get activePage(): number{
         return this._activePage
+    }
+    get title(): string{
+        return this._title
     }
 
     setSearch(value: string): void{
@@ -47,16 +50,34 @@ export default class FilterStore implements ILocalStore{
     }
 
     setFilterCategory(value: Option[]): void{
-        this._filterCategory = value;
+        this._filterCategory = value
     }
 
-    setTitleCategory (data: Option[]): string{
-        return  data.map((el: Option) => el.value).join();
+    getTitleCategory (data: Option[] = this._filterCategory): string{
+        if(data.length === 0){
+            return ''
+        }
+        this._title = data.map((el: Option) => el.value).join();
+        return this._title
     }
 
     setActivePage (value: number){
         this._activePage = value
     }
+
+    // private readonly _qpReaction: IReactionDisposer = reaction(
+    //     () => {
+    //         return rootStore.query.params
+    //     },
+    //     (newFilter) => {
+    //         // console.log('reaction Filter', toJS(newFilter))
+    //         // console.log('reaction Filter', this._search)
+    //         // this._search = 'fffffff'
+    //         // this._activePage = newFilter.offset
+    //     }
+    // )
+
     destroy(): void {
+        // this._qpReaction()
     }
 }

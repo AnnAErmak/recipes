@@ -1,0 +1,23 @@
+@import 'src/styles/variables';
+
+.filterWrapper{
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  .inputWrapper{
+    display: flex;
+    gap: 19px;
+    margin-bottom: 20px;
+    width: 100%;
+
+    .button_search{
+      border-radius: $border-radius;
+    }
+  }
+
+  .dropdown{
+    width: 300px;
+  }
+}

@@ -16,7 +16,7 @@ export type InputProps = Omit<
 
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ value, onChange, afterSlot, disabled, ...props }, ref) => {
+  ({ value='', onChange, afterSlot, disabled, ...props }, ref) => {
 
       const handleChange = React.useCallback(
         (event: React.ChangeEvent<HTMLInputElement>): void => {

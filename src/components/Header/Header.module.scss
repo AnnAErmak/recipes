@@ -1,38 +1,35 @@
-header{
+.header{
   background: #fff;
-}
 
-.header_wrapper{
-  display: flex;
-  justify-content: space-between;
-  padding: 14px 0;
-  }
-.header_menu{
-  display: flex;
-  gap: 80px;
-
-  .logo{
+  .wrapper{
     display: flex;
-    gap: 20px;
-    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
 
-    p{
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 120%;
+    .menu{
+      display: flex;
+      gap: 80px;
+
+      .logo{
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+      nav{
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        line-height: 125%;
+      }
     }
 
-  }
-  nav{
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    line-height: 125%;
+    .icons{
+      display: flex;
+      gap: 17px;
+      align-items: center;
+    }
   }
 }
 
-.icons{
-  display: flex;
-  gap: 17px;
-  align-items: center;
-}
+
+
