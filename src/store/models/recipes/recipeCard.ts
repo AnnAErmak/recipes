@@ -53,9 +53,9 @@ export type RecipeCardModel = {
 }
 
 export const normalizeRecipes = (from: RecipeCardApi): RecipeCardModel => {
-    const response = from.results.map(el => {
+    const response: RecipeCard[] = from.results.map(el => {
 
-        const ingredientsArr = el.nutrition.ingredients.map(item => item.name).join(' + ')
+        const ingredientsArr: string = el.nutrition.ingredients.map(item => item.name).join(' + ')
 
         return {
             id: el.id,
@@ -67,5 +67,5 @@ export const normalizeRecipes = (from: RecipeCardApi): RecipeCardModel => {
         }
     })
 
-    return {totalResults: from.totalResults, recipe: response }
+    return {totalCount: from.totalResults, recipe: response }
 }

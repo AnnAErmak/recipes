@@ -6,6 +6,7 @@ import {Meta} from "utils/meta";
 import {ILocalStore} from "utils/useLocalStore";
 import rootStore from "../RootStore";
 import {normalizeRecipes, RecipeCardApi, RecipeCardModel} from "../models/recipes";
+
 type PrivateFields = '_recipesList' | '_meta' | '_totalCount';
 
 export default class RecipesStore implements ILocalStore{
@@ -82,7 +83,7 @@ export default class RecipesStore implements ILocalStore{
             return rootStore.query.params
         },
         (newFilter) => {
-            // this.getRecipes(newFilter)
+            this.getRecipes(newFilter)
         }
     )
 

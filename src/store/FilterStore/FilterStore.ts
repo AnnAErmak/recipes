@@ -1,5 +1,6 @@
 import {action, computed, IReactionDisposer, makeObservable, observable, reaction} from "mobx";
 import {Option} from "components/MultiDropdown";
+import {PAGINATION_LIMIT} from "config/paginations";
 import {ILocalStore} from "utils/useLocalStore";
 import rootStore from "../RootStore";
 
@@ -65,19 +66,16 @@ export default class FilterStore implements ILocalStore{
         this._activePage = value
     }
 
-    // private readonly _qpReaction: IReactionDisposer = reaction(
-    //     () => {
-    //         return rootStore.query.params
-    //     },
-    //     (newFilter) => {
-    //         // console.log('reaction Filter', toJS(newFilter))
-    //         // console.log('reaction Filter', this._search)
-    //         // this._search = 'fffffff'
-    //         // this._activePage = newFilter.offset
-    //     }
-    // )
+    private readonly _qpReaction: IReactionDisposer = reaction(
+        () => {
+            return rootStore.query.getParam('offset')
+        },
+        (newFilter) => {
+            this.setActivePage((+newFilter / PAGINATION_LIMIT) + 1)
+        }
+    )
 
     destroy(): void {
-        // this._qpReaction()
+        this._qpReaction()
     }
 }

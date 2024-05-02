@@ -30,6 +30,9 @@
       align-items: center;
       align-content: center;
       gap: 16px;
+      svg{
+        color: $color-text-accent;
+      }
 
       .svg_wrapper{
         display: flex;

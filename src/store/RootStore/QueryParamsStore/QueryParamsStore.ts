@@ -30,6 +30,5 @@ export default class QueryParamsStore {
         search = search.startsWith('?') ? search.slice(1) : search;
         this._search = search;
         this._params = qs.parse(search);
-        console.log('QueryParamsStore', this._params)
     }
 }

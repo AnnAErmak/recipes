@@ -1,13 +1,16 @@
 import * as React from "react";
+import Container from "components/Container";
 import Text from "components/Text";
 import {AnalyzedInstruction} from "store/models/recipes";
-import Container from "../../../../components/Container";
 import styles from './Steps.module.scss';
 
 type StepsProps = {
     analyzedInstructions: AnalyzedInstruction[]
 }
 const Steps: React.FC<StepsProps> = ({analyzedInstructions}) => {
+
+    if(!analyzedInstructions) return <p>У этого рецепта нет инструкции</p>
+
     return (
         <section>
             <Container>

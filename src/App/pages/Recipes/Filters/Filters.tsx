@@ -6,8 +6,8 @@ import Search from "components/Icons/Search";
 import Input from "components/Input";
 import MultiDropdown, {Option} from "components/MultiDropdown";
 import {categories} from "config/categories";
+import FilterStore from "store/FilterStore";
 import {useLocalStore} from "utils/useLocalStore";
-import FilterStore from "../../../../store/FilterStore";
 import styles from './Filters.module.scss'
 
 
@@ -31,6 +31,7 @@ const Filters: React.FC = () => {
         const categories = filterStore.filterCategory.map((el: Option) => el.value).join();
         params.set("type", categories)
         params.set("query", filterStore.search)
+        params.set("offset", '0')
         setParams(params)
     }
 

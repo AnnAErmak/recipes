@@ -22,15 +22,15 @@ export type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({
-                                       className,
-                                       image,
-                                       captionSlot,
-                                       title,
-                                       subtitle,
-                                       contentSlot,
-                                       onClick,
-                                       actionSlot
-                                   }) => {
+   className,
+   image,
+   captionSlot,
+   title,
+   subtitle,
+   contentSlot,
+   onClick,
+   actionSlot
+}) => {
 
     return (
         <div className={cn(styles.cardWrapper, className)} onClick={onClick}>

@@ -11,13 +11,15 @@ type IngredientsProps = {
 }
 
 const Ingredients: React.FC<IngredientsProps> = ({ingredients}) => {
+
+    if(!ingredients) return <></>
     return (
         <div className={styles.ingredients}>
             <Text view={'p-20'} weight={'bold'} className={styles.title}>Ingredients</Text>
             <ul className={styles.list}>
                 {ingredients.map((item, index) => (
                     <li key={item.id + index} className={styles.ingredient}>
-                        <div className={styles.svg_wrapper}><Dishtrai/></div>
+                        <div className={styles.svg_wrapper}><Dishtrai color={'accent'}/></div>
                         <Text view={'p-16'}>{item.original}</Text>
                     </li>
                 ))}

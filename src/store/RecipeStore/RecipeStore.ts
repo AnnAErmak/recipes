@@ -17,8 +17,8 @@ export default class RecipeStore implements ILocalStore{
 
     constructor() {
         makeObservable<RecipeStore, PrivateFields>(this,{
-            _recipeInfo: observable,
-            _equipment: observable,
+            _recipeInfo: observable.ref,
+            _equipment: observable.ref,
             _meta: observable,
             recipeInfo: computed,
             equipment: computed,
@@ -53,16 +53,16 @@ export default class RecipeStore implements ILocalStore{
                 apiKey:API_KEY,
             }
         })
-        console.log(EquipmentById)
+
         runInAction(() => {
             if (responseInfo.status !== 200 && EquipmentById.status !== 200) {
                 this._meta = Meta.error
             }
 
             try {
-                this._meta = Meta.success;
                 this._recipeInfo = normalizeRecipe(responseInfo.data);
                 this._equipment = EquipmentById.data.equipment
+                this._meta = Meta.success;
                 return;
             } catch (e) {
                 console.error(e.message)
